@@ -1,0 +1,69 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Yovo
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" >
+
+  <!--<pre>{{ data | json }}</pre>-->
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">YOVO</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ng-container *ngIf="shows[0]; let show">
+    <ion-card routerLink="/detail" (click)="setDetailData(show)" color="primary" class="custom-background-card" [style.background-image]="'url(' + show.image_thumbnail_path + ')'">
+      <div style="height: 300px">
+
+      </div>
+      <div style="backdrop-filter: blur(6px); text-align: center; padding-bottom: 15px">
+        <ion-card-header>
+          <ion-card-title>{{show.name}}</ion-card-title>
+          <ion-card-subtitle>top #1</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          {{show.country}} | {{show.network}} | {{show.status}}
+        </ion-card-content>
+
+        <ion-button color="dark" style="border-color: #ffffff" fill="outline"><ion-icon slot="start" name="eye"></ion-icon> Zobrazit</ion-button>
+        <ion-button color="dark" fill="outline"><ion-icon slot="start" name="heart"></ion-icon> Oblíbené</ion-button>
+      </div>
+    </ion-card>
+  </ng-container>
+
+
+  <div class="ion-padding" style="padding-bottom: 0"><h3 style="font-weight: bolder">Aktuálně populární</h3></div>
+
+  <!--
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" *ngFor="let show of data.tv_shows">
+        <ion-card style="margin: 0px 2px">
+          <img style="height: 180px; margin-bottom: -5px" [src]="show.image_thumbnail_path" />
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  -->
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" *ngFor="let item of shows">
+        <ion-card routerLink="/detail" style="margin: 0px 2px" (click)="setDetailData(item)">
+          <img style="height: 180px; margin-bottom: -5px" [src]="item.image_thumbnail_path" />
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

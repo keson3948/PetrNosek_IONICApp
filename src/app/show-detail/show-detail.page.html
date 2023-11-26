@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button text="Přehled"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>{{show.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ng-container *ngIf="details.tvShow; let moreinfo">
+    <ion-card class="title-background-card" [style.background-image]="'url(' + moreinfo.image_path + ')'">
+      <div class="title-in-gradient">
+        <div style="height: 300px">
+
+        </div>
+        <div class="title-in-card">
+          <ion-card-header style="padding-bottom: 0">
+            <ion-card-title>{{moreinfo.name}}</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ng-container *ngFor="let genre of moreinfo.genres">
+                    <ion-chip [outline]="true">{{genre}}</ion-chip>
+                  </ng-container>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  {{moreinfo.country}} | {{moreinfo.network}} | {{moreinfo.status}}
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+          </ion-card-content>
+        </div>
+      </div>
+    </ion-card>
+  </ng-container>
+
+</ion-content>

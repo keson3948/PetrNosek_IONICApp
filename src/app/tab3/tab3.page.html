@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Hledat</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+    <ion-searchbar animated="true" show-cancel-button="focus" placeholder="Vyhledat..." cancel-button-text="Zrušit" [debounce]="1000" (ionInput)="handleInput($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" *ngFor="let item of shows">
+        <ion-card routerLink="/detail" style="margin: 0px 2px" (click)="setDetailData(item)">
+          <img style="height: 180px; margin-bottom: -5px" [src]="item.image_thumbnail_path" />
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

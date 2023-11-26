@@ -1,0 +1,26 @@
+.title-background-card{
+  --background: none;  /* Odstraní výchozí pozadí ion-card */
+  background-size: cover;  /* Zajistí, že obrázek pokryje celou kartu */
+  background-position: center;  /* Centruje obrázek */
+  border-radius: 0px;
+  margin: 0;
+}
+
+ion-toolbar {
+  --opacity: 0;
+}
+
+.title-in-card{
+  text-align: center;
+  padding-bottom: 15px;
+}
+
+.title-in-gradient{
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,0) 50%, rgba(0,0,0,1) 80%);
+}
+
+ion-badge{
+  --background: transparent;
+  border: 1px #ffffff;
+}

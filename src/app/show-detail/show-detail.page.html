@@ -1,13 +1,20 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-
-    <ion-buttons slot="start">
-      <ion-back-button text="Přehled"></ion-back-button>
-    </ion-buttons>
-
+    <ion-back-button slot="start" text="Zpět"></ion-back-button>
     <ion-title>{{show.name}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleFavorite()">
+        <ion-icon *ngIf="isFav(); else notFavIcon" name="heart"></ion-icon>
+        <ng-template #notFavIcon>
+          <ion-icon name="heart-outline"></ion-icon>
+        </ng-template>
+      </ion-button>
+
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
+
 
 <ion-content [fullscreen]="true">
   <ng-container *ngIf="details.tvShow; let moreinfo">

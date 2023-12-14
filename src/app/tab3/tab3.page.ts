@@ -31,21 +31,16 @@ export class Tab3Page {
 
   async loadShows(event?: InfiniteScrollCustomEvent){
     const loading = await this.loadingCtrl.create({
-      message: "Načítání...",
       spinner: "bubbles",
     });
 
-    await loading.present();
-
     this.load();
-
-    await loading.dismiss();
 
     if (this.page < this.maxPages) {
       this.page++;
     } else {
       if(event){
-        event.target.disabled = true; // Deaktivace infinite scroll
+        event.target.disabled = true;
       }
     }
     event?.target.complete();
@@ -53,8 +48,10 @@ export class Tab3Page {
 
   load() {
     this.showApiService.getShowSearch$(this.search, this.page).subscribe((res) => {
-      this.shows.push(...res.tv_shows);
       this.maxPages = res.pages;
+      if(this.page <= this.maxPages){
+        this.shows.push(...res.tv_shows);
+      }
     });
   }
 
@@ -92,4 +89,14 @@ export class Tab3Page {
     }
   }
 
+  private disablenfiniteScroll() {
+    const infiniteScroll = document.querySelector('ion-infinite-scroll');
+    if (infiniteScroll) {
+      infiniteScroll.disabled = true;
+    }
+  }
+
+  showSearchHistory($event: any) {
+    
+  }
 }

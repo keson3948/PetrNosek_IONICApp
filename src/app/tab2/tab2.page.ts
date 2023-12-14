@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {TvshowsFavService} from "../services/tvshows-fav/tvshows-fav.service";
+import {Show} from "../models/show.model";
+import {firstValueFrom} from "rxjs";
+import {TvshowsApiService} from "../services/tvshows-api/tvshows-api.service";
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +11,24 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  favShows: Show[] = [];
+
+  constructor(
+    private tvshowFavService: TvshowsFavService,
+    private showApiService: TvshowsApiService,
+  ) {
+    this.initFav();
+  }
+
+  async initFav() {
+    this.tvshowFavService.favShows$.subscribe(shows => {
+      this.favShows = shows;
+    });
+  }
+
+  setDetailData(show: Show) {
+    this.showApiService.detail = show;
+  }
+
 
 }

@@ -15,6 +15,8 @@ export class Tab1Page {
   shows:any = [];
   page = 1;
 
+  tv_shows:Observable<Show>[] = [];
+
 
 
   constructor(

@@ -11,9 +11,12 @@ export class TvshowsApiService {
 
   detail!: Show;
 
+
   constructor(
-    private http: HttpClient
-  ) { }
+    private http: HttpClient,
+  ) {
+
+  }
 
   getMostPopular$(page: number) : Observable<PopularShows>{
     return this.http.get<PopularShows>(`${environment.baseUrl}most-popular?page=${page}`);
@@ -27,6 +30,9 @@ export class TvshowsApiService {
     return this.http.get<PopularShows>(`${environment.baseUrl}search?q=${value}&page=${page}`);
   }
 
+  setFavorite() {
+
+  }
 }
 
 

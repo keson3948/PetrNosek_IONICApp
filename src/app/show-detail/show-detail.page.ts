@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {TvshowsApiService} from "../services/tvshows-api/tvshows-api.service";
+import {TvshowsFavService} from "../services/tvshows-fav/tvshows-fav.service";
 import {RootInterface, Show} from "../models/show.model";
 import {InfiniteScrollCustomEvent, LoadingController} from "@ionic/angular";
 
@@ -16,6 +17,7 @@ export class ShowDetailPage implements OnInit {
 
   constructor(
     private showApiService: TvshowsApiService,
+    private tvshowFavService: TvshowsFavService,
     private loadingCtrl: LoadingController
   ) {
     this.show = this.showApiService.detail;
@@ -48,7 +50,23 @@ export class ShowDetailPage implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
+
+  toggleFavorite() {
+    if (this.details) {
+      if (!this.isFav()) {
+        this.tvshowFavService.addFavShow(this.show).then(() => {
+          console.log("Přidávám");
+        });
+      } else {
+        this.tvshowFavService.removeFavShow(this.show).then(() => {
+          console.log("Odebírám");
+        });
+      }
+    }
+  }
+  isFav(): boolean {
+    return this.tvshowFavService.isFav$(this.show.id);
+  }
 }

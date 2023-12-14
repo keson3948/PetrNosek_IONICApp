@@ -14,8 +14,6 @@
   </ion-toolbar>
 </ion-header>
 
-
-
 <ion-content [fullscreen]="true">
   <ng-container *ngIf="details.tvShow; let moreinfo">
     <ion-card class="title-background-card" [style.background-image]="'url(' + moreinfo.image_path + ')'">
@@ -28,7 +26,7 @@
             <ion-card-title>{{moreinfo.name}}</ion-card-title>
           </ion-card-header>
 
-          <ion-card-content>
+          <ion-card-content style="padding-bottom: 0">
             <ion-grid>
               <ion-row>
                 <ion-col>
@@ -48,6 +46,78 @@
         </div>
       </div>
     </ion-card>
+
+
+    <ion-segment value="times" [(ngModel)]="selectedSegment">
+      <ion-segment-button value="times">
+        <ion-label>Vysílací časy</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="about">
+        <ion-label>O titulu</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="pictures">
+        <ion-label>Obrázky</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div *ngIf="selectedSegment === 'about'" class="ion-padding">
+
+      <ion-row>
+        <ion-col size="6">
+          <b>Start: </b>{{moreinfo.start_date | date: 'dd.MM.y'}}
+        </ion-col>
+        <ion-col size="6">
+          <b>End: </b>
+          <ng-container *ngIf="moreinfo.end_date; else noEndDate">
+            {{ moreinfo.end_date }}
+          </ng-container>
+          <ng-template #noEndDate>Still Running</ng-template>
+        </ion-col>
+        <ion-col size="6">
+          <b>Runtime: </b>{{moreinfo.runtime}}
+        </ion-col>
+        <ion-col size="6">
+          <b>Rating: </b>{{moreinfo.rating}}
+        </ion-col>
+      </ion-row>
+
+      <p>{{moreinfo.description}}</p>
+
+
+    </div>
+
+    <div *ngIf="selectedSegment === 'times'">
+
+      <ion-accordion-group>
+        <ion-accordion *ngFor="let season of groupedEpisodes | keyvalue">
+          <ion-item slot="header">
+            <ion-label>Série {{ season.key }}</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <ion-list lines="none">
+              <ion-item *ngFor="let episode of season.value">
+                <ion-label>
+                  <h2>{{ episode.episode }}. {{ episode.name }}</h2>
+                  <p>Vysíláno {{ episode.air_date | date: 'dd.MM.y (HH:mm)'}}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </div>
+
+    <div *ngIf="selectedSegment === 'pictures'" class="ion-padding">
+      <ion-row >
+        <ng-container *ngFor="let img of moreinfo.pictures">
+          <ion-col size="6">
+
+            <img [src]="img">
+          </ion-col>
+        </ng-container>
+      </ion-row>
+    </div>
+
   </ng-container>
 
 </ion-content>

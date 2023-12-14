@@ -31,13 +31,15 @@
           {{show.country}} | {{show.network}} | {{show.status}}
         </ion-card-content>
 
-        <ion-button color="secondary"><ion-icon slot="start" name="eye"></ion-icon> Zobrazit</ion-button>
-        <ion-button color="secondary"><ion-icon slot="start" name="heart"></ion-icon> Oblíbené</ion-button>
+
+
+        <!--<ion-button color="secondary"><ion-icon slot="start" name="eye"></ion-icon> Zobrazit</ion-button>
+        <ion-button color="secondary"><ion-icon slot="start" name="heart"></ion-icon> Oblíbené</ion-button>-->
       </div>
     </ion-card>
   </ng-container>
 
-  <div class="ion-padding" style="padding-bottom: 0"><h3 style="font-weight: bolder">Aktuálně populární</h3></div>
+  <div class="ion-padding" style="padding-bottom: 0"><h3 style="font-weight: bolder">TOP 10 POŘADŮ</h3></div>
 
   <!--
   <ion-grid>
@@ -53,7 +55,27 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col size="4" *ngFor="let item of shows">
+      <ion-col size="6" *ngFor="let item of shows.slice(0, 10); let indexOfelement=index; let last = last;">
+        <ion-row>
+          <ion-col size="3">
+            <ng-container *ngIf="!last"><h1 class="number_show_top_list">{{indexOfelement+1}}</h1></ng-container>
+            <ng-container *ngIf="last"><h1 class="number_show_top_list" style="margin-left: -24px; letter-spacing:-23px; font-size: 125px; margin-top: 20px">{{indexOfelement+1}}</h1></ng-container>
+          </ion-col>
+          <ion-col size="9">
+            <ion-card routerLink="/detail" style="margin: 0px 2px" (click)="setDetailData(item)" class="show_card">
+              <img style="height: 180px; margin-bottom: -5px" [src]="item.image_thumbnail_path" />
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="ion-padding" style="padding-bottom: 0"><h3 style="font-weight: bolder">Aktuálně populární</h3></div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" *ngFor="let item of shows.slice(11);">
         <ion-card routerLink="/detail" style="margin: 0px 2px" (click)="setDetailData(item)">
           <img style="height: 180px; margin-bottom: -5px" [src]="item.image_thumbnail_path" />
         </ion-card>

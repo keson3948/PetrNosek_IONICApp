@@ -1,0 +1,47 @@
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 900;
+  src: url('../../assets/fonts/Roboto-Black.ttf');
+}
+
+.number_show_top_list{
+  overflow: visible;
+  margin: 0;
+  position: absolute;
+  font-size: 150px;
+  margin-left: -6px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  text-align: left;
+  /* Create the gradient. */
+  background-image: linear-gradient(180deg, #6722ff, #00d4ff);
+
+  /* Set the background size and repeat properties. */
+  background-size: 100%;
+  background-repeat: repeat;
+
+  /* Use the text as a mask for the background. */
+  /* This will show the gradient as a text color rather than element bg. */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+.show_card{
+  -webkit-box-shadow: -16px 0px 57px -14px rgba(0,0,0,0.75);
+  -moz-box-shadow: -16px 0px 57px -14px rgba(0,0,0,0.75);
+  box-shadow: -16px 0px 57px -14px rgba(0,0,0,0.75);
+}
+
+.custom-background-card {
+  --background: none;  /* Odstraní výchozí pozadí ion-card */
+  background-size: cover;  /* Zajistí, že obrázek pokryje celou kartu */
+  background-position: center;  /* Centruje obrázek */
+  margin-bottom: 0;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 25px 0px rgba(103,34,255,0.47);
+  -moz-box-shadow: 0px 0px 25px 0px rgba(103,34,255,0.47);
+  box-shadow: 0px 0px 25px 0px rgba(103,34,255,0.47);
+}

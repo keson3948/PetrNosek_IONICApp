@@ -31,4 +31,7 @@ export class Tab2Page {
   }
 
 
+  removeShow(show: Show) {
+    this.tvshowFavService.removeFavShow(show);
+  }
 }

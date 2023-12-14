@@ -23,7 +23,7 @@ export class Tab1Page {
     private showApiService: TvshowsApiService,
     private loadingCtrl: LoadingController
   ) {
-    this.fetchData();  // Volání fetchData zde
+    //this.fetchData();  // Volání fetchData zde
     this.loadShows();
   }
 
@@ -45,7 +45,6 @@ export class Tab1Page {
       }
     });
   }
-
 
   fetchData() {
     this.showApiService.getMostPopular$(this.page)

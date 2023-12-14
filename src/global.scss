@@ -25,14 +25,6 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-.custom-background-card {
-  --background: none;  /* Odstraní výchozí pozadí ion-card */
-  background-size: cover;  /* Zajistí, že obrázek pokryje celou kartu */
-  background-position: center;  /* Centruje obrázek */
-  margin-bottom: 0;
-  border-radius: 10px;
-}
-
 .white-button{
   border-color: #ffffff;
 }

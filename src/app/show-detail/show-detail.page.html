@@ -23,10 +23,10 @@
         </div>
         <div class="title-in-card">
           <ion-card-header style="padding-bottom: 0">
-            <ion-card-title>{{moreinfo.name}}</ion-card-title>
+            <ion-card-title class="show_title">{{moreinfo.name}}</ion-card-title>
           </ion-card-header>
 
-          <ion-card-content style="padding-bottom: 0">
+          <ion-card-content>
             <ion-grid>
               <ion-row>
                 <ion-col>
@@ -36,7 +36,7 @@
                 </ion-col>
               </ion-row>
               <ion-row>
-                <ion-col>
+                <ion-col style="color: white">
                   {{moreinfo.country}} | {{moreinfo.network}} | {{moreinfo.status}}
                 </ion-col>
               </ion-row>
@@ -48,74 +48,85 @@
     </ion-card>
 
 
-    <ion-segment value="times" [(ngModel)]="selectedSegment">
-      <ion-segment-button value="times">
-        <ion-label>Vysílací časy</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="about">
-        <ion-label>O titulu</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="pictures">
-        <ion-label>Obrázky</ion-label>
-      </ion-segment-button>
-    </ion-segment>
-
-    <div *ngIf="selectedSegment === 'about'" class="ion-padding">
-
-      <ion-row>
-        <ion-col size="6">
-          <b>Start: </b>{{moreinfo.start_date | date: 'dd.MM.y'}}
-        </ion-col>
-        <ion-col size="6">
-          <b>End: </b>
-          <ng-container *ngIf="moreinfo.end_date; else noEndDate">
-            {{ moreinfo.end_date }}
-          </ng-container>
-          <ng-template #noEndDate>Still Running</ng-template>
-        </ion-col>
-        <ion-col size="6">
-          <b>Runtime: </b>{{moreinfo.runtime}}
-        </ion-col>
-        <ion-col size="6">
-          <b>Rating: </b>{{moreinfo.rating}}
-        </ion-col>
-      </ion-row>
-
-      <p>{{moreinfo.description}}</p>
-
-
+    <div class="ion-padding">
+      <ion-segment value="times" [(ngModel)]="selectedSegment">
+        <ion-segment-button value="times">
+          <ion-label>Vysílací časy</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="about">
+          <ion-label>O titulu</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="pictures">
+          <ion-label>Obrázky</ion-label>
+        </ion-segment-button>
+      </ion-segment>
     </div>
 
-    <div *ngIf="selectedSegment === 'times'">
+    <div class="ion-margin more-info-block">
+      <div *ngIf="selectedSegment === 'about'" class="ion-padding">
 
-      <ion-accordion-group>
-        <ion-accordion *ngFor="let season of groupedEpisodes | keyvalue">
-          <ion-item slot="header">
-            <ion-label>Série {{ season.key }}</ion-label>
-          </ion-item>
-          <div class="ion-padding" slot="content">
-            <ion-list lines="none">
-              <ion-item *ngFor="let episode of season.value">
-                <ion-label>
-                  <h2>{{ episode.episode }}. {{ episode.name }}</h2>
-                  <p>Vysíláno {{ episode.air_date | date: 'dd.MM.y (HH:mm)'}}</p>
-                </ion-label>
-              </ion-item>
-            </ion-list>
-          </div>
-        </ion-accordion>
-      </ion-accordion-group>
-    </div>
-
-    <div *ngIf="selectedSegment === 'pictures'" class="ion-padding">
-      <ion-row >
-        <ng-container *ngFor="let img of moreinfo.pictures">
+        <ion-row>
           <ion-col size="6">
-
-            <img [src]="img">
+            <b>Start: </b>{{moreinfo.start_date | date: 'dd.MM.y'}}
           </ion-col>
-        </ng-container>
-      </ion-row>
+          <ion-col size="6">
+            <b>End: </b>
+            <ng-container *ngIf="moreinfo.end_date; else noEndDate">
+              {{ moreinfo.end_date }}
+            </ng-container>
+            <ng-template #noEndDate>-</ng-template>
+          </ion-col>
+          <ion-col size="6">
+            <b>Runtime: </b>{{moreinfo.runtime}} min.
+          </ion-col>
+          <ion-col size="6">
+            <b>Rating: </b>{{moreinfo.rating}} / 10
+          </ion-col>
+        </ion-row>
+
+        <p [innerHTML]="moreinfo.description"></p>
+
+
+      </div>
+
+      <div *ngIf="selectedSegment === 'times'">
+
+        <ion-accordion-group>
+          <ion-accordion *ngFor="let season of groupedEpisodes | keyvalue">
+            <ion-item slot="header" color="rose">
+              <ion-label>Série {{ season.key }}</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-list lines="none">
+                <ion-item *ngFor="let episode of season.value">
+                  <ion-label>
+                    <h2>{{ episode.episode }}. {{ episode.name }}</h2>
+                    <p>Vysíláno {{ episode.air_date | date: 'dd.MM.y (HH:mm)'}}</p>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </div>
+
+      <div *ngIf="selectedSegment === 'pictures'" class="ion-padding">
+        <ion-row >
+          <ng-container *ngIf="moreinfo.pictures && moreinfo.pictures.length > 0; else noPictures">
+            <ng-container *ngFor="let img of moreinfo.pictures">
+              <ion-col size="12">
+                <img [src]="img">
+              </ion-col>
+            </ng-container>
+          </ng-container>
+
+          <ng-template #noPictures>
+            <ion-col size="12">
+              <p style="text-align: center">Nejsou dostupné žádné obrázky pro tento pořad.</p>
+            </ion-col>
+          </ng-template>
+        </ion-row>
+      </div>
     </div>
 
   </ng-container>

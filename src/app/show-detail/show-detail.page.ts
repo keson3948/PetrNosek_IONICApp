@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import { ToastController } from '@ionic/angular';
+import {ModalController, ToastController} from '@ionic/angular';
 import {TvshowsApiService} from "../services/tvshows-api/tvshows-api.service";
 import {TvshowsFavService} from "../services/tvshows-fav/tvshows-fav.service";
 import {Episode, RootInterface, Show} from "../models/show.model";
@@ -27,11 +27,12 @@ export class ShowDetailPage implements OnInit {
     private showApiService: TvshowsApiService,
     private tvshowFavService: TvshowsFavService,
     private loadingCtrl: LoadingController,
-    private toastController: ToastController
+    private toastController: ToastController,
   ) {
     this.show = this.showApiService.detail;
     this.loadShows();
   }
+
 
 
   async loadShows(event?: InfiniteScrollCustomEvent){
@@ -101,7 +102,7 @@ export class ShowDetailPage implements OnInit {
       message: message,
       duration: 5000,
       position: "bottom",
-      icon: icon
+      icon: icon,
     });
 
     await toast.present();

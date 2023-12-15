@@ -74,6 +74,18 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  --ion-color-rose: #fecdd3;
+  --ion-color-rose-rgb: 254, 205, 211;
+  --ion-color-rose-contrast: #000000;
+  --ion-color-rose-contrast-rgb: 0, 0, 0;
+  --ion-color-rose-shade: #e0b4ba;
+  --ion-color-rose-tint: #fed2d7;
+
+}
+
+ion-title{
+  color: #6722FF;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -81,6 +93,11 @@
    * Dark Colors
    * -------------------------------------------
    */
+
+  ion-title{
+    color: white;
+  }
+
 
   body {
     --ion-color-primary: white;
@@ -226,11 +243,8 @@
     --ion-color-step-950: #f3f3f3;
 
     --ion-item-background: #1e1e1e;
-
     --ion-toolbar-background: #1f1f1f;
-
     --ion-tab-bar-background: #1f1f1f;
-
     --ion-card-background: #1e1e1e;
   }
 }

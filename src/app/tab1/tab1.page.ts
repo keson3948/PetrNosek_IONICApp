@@ -33,10 +33,10 @@ export class Tab1Page {
       spinner: "bubbles",
     });
 
-    await loading.present();
+    //await loading.present();
 
     this.showApiService.getMostPopular$(this.page).subscribe((res) =>{
-      loading.dismiss();
+      //loading.dismiss();
       this.shows.push(...res.tv_shows);
 
       event?.target.complete();

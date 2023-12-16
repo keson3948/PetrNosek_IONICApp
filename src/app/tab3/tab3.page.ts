@@ -36,21 +36,16 @@ export class Tab3Page {
 
     this.load();
 
-    if (this.page < this.maxPages) {
-      this.page++;
-    } else {
-      if(event){
-        event.target.disabled = true;
-      }
-    }
     event?.target.complete();
   }
 
   load() {
     this.showApiService.getShowSearch$(this.search, this.page).subscribe((res) => {
       this.maxPages = res.pages;
-      if(this.page <= this.maxPages){
+      if(this.page <= res.pages){
         this.shows.push(...res.tv_shows);
+        //console.log("THIS.PAGE: " + this.page + "| PAGE: " + res.page + "| MAX: " + res.pages);
+        this.page++;
       }
     });
   }
@@ -66,7 +61,6 @@ export class Tab3Page {
   }
 
   loadMore($event: InfiniteScrollCustomEvent) {
-    this.page++;
     this.loadShows($event);
   }
 
@@ -96,7 +90,4 @@ export class Tab3Page {
     }
   }
 
-  showSearchHistory($event: any) {
-    
-  }
 }

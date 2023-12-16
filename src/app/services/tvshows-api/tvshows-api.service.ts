@@ -19,15 +19,15 @@ export class TvshowsApiService {
   }
 
   getMostPopular$(page: number) : Observable<PopularShows>{
-    return this.http.get<PopularShows>(`https://www.episodate.com/api/most-popular?page=${page}`);
+    return this.http.get<PopularShows>(`${environment.baseUrl}most-popular?page=${page}`);
   }
 
   getShowDetails$(id: number) : Observable<RootInterface>{
-    return this.http.get<RootInterface>(`https://www.episodate.com/api/show-details?q=${id}`);
+    return this.http.get<RootInterface>(`${environment.baseUrl}show-details?q=${id}`);
   }
 
   getShowSearch$(value: string, page: number) : Observable<PopularShows>{
-    return this.http.get<PopularShows>(`https://www.episodate.com/api/search?q=${value}&page=${page}`);
+    return this.http.get<PopularShows>(`${environment.baseUrl}search?q=${value}&page=${page}`);
   }
 
   setFavorite() {
